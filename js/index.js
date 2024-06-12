@@ -1,31 +1,39 @@
-let valorFijo = 0
-let tipoNavegador = 0
-let aj = 0
-let alerta = false
-let factorAlerta = 1
+let ropa =["franela","pantalon","gorra",];
+let configuracion ={ valorfijo: 0, tipoRopa: 0, aj: 0, alerta: false, factorAlerta: 1 };
+let talla = ["m", "s", "x", "xl"]
 
-let mensajePrincipal = "¿en que navegador desea descargar el programa \n" +
-    "1) Google Chrome \n" +
-    "2) Opera \n" +
-    "3) Microsoft Edge\n" +
-    " \n" +
-    "Ingresa el nro. de tu interés."
+let mensajePrincipal = "¿que ropas desea comprar?\n" + 
+    "1) " + ropa [0] + "\n" + 
+    "2) " + ropa [1] + "\n" + 
+    "3) " + ropa [2] + "\n" + 
+    "\nIngresa el numero de tu interes";
 
-let quieroDescargar = true
-while (quieroDescargar) {
-    iniciarCotizacion()
-    quieroDescargar = confirm("Si no se inicio la descarga dele aceptar y se volvera a descargar")
+let quieroComprar = true;
+while (quieroComprar) {
+    iniciarCotizacion(); 
+    quieroComprar = confirm(prompt("¿que talla desea llevar?\n" +
+        "1) " + talla[0] + "\n" +
+        "2) " + talla[1] + "\n" +
+        "3) " + talla[2] + "\n" +
+        "4) " + talla[3] + "\n" +
+        "\nIngresa el número de tu interés."
+        
+    ));
+}
+function iniciarCotizacion() {
+    configuracion.tipoRopa = parseInt(prompt(mensajePrincipal))
+
+    if (configuracion.tipoRopa <1 || configuracion.tipoRopa >3){
+        alert("⛔ Error en el dato ingresado.");
+    } else {
+        configuracion.alerta = confirm("pon un numero");
+        if (configuracion.alerta === false){
+            configuracion.factorAlerta = 1;
+        }
 }
 
-function iniciarCotizacion() {
-    tipoNavegador= parseInt(prompt(mensajePrincipal))
 
-    if (tipoNavegador !== 1 && tipoNavegador !== 2 && tipoNavegador !== 3) {
-        alert("⛔️ Error en el dato ingresado.")
-    } else {
-        alerta = confirm("¿Seguro que desea descargar?")
-        if (alerta === false) {
-            factorAlerta = 1
-        }
-        }
-    }
+
+
+
+}
