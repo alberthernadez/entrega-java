@@ -1,39 +1,36 @@
-let ropa =["franela","pantalon","gorra",];
-let configuracion ={ valorfijo: 0, tipoRopa: 0, aj: 0, alerta: false, factorAlerta: 1 };
-let talla = ["m", "s", "x", "xl"]
+const CAROUSEL_ENTRADA = document.querySelector(".carousel-entrada");
+const CAROUSEL_ITEM = document.querySelectorAll(".carousel-item");
+const CAROUSEL_PREV = document.getElementById("carousel-prev");
+const CAROUSEL_NEXT = document.getElementById("carousel-next");
 
-let mensajePrincipal = "¿que ropas desea comprar?\n" + 
-    "1) " + ropa [0] + "\n" + 
-    "2) " + ropa [1] + "\n" + 
-    "3) " + ropa [2] + "\n" + 
-    "\nIngresa el numero de tu interes";
+let contador = 0;
 
-let quieroComprar = true;
-while (quieroComprar) {
-    iniciarCotizacion(); 
-    quieroComprar = confirm(prompt("¿que talla desea llevar?\n" +
-        "1) " + talla[0] + "\n" +
-        "2) " + talla[1] + "\n" +
-        "3) " + talla[2] + "\n" +
-        "4) " + talla[3] + "\n" +
-        "\nIngresa el número de tu interés."
-        
-    ));
-}
-function iniciarCotizacion() {
-    configuracion.tipoRopa = parseInt(prompt(mensajePrincipal))
+console.log(CAROUSEL_ITEM)
+CAROUSEL_PREV.addEventListener("click", ()=>{
+    contador--;
+    if(contador < 0){
+        contador = CAROUSEL_ITEM.length - 1;
+    }
+    carouselActualizacion();
 
-    if (configuracion.tipoRopa <1 || configuracion.tipoRopa >3){
-        alert("⛔ Error en el dato ingresado.");
-    } else {
-        configuracion.alerta = confirm("pon un numero");
-        if (configuracion.alerta === false){
-            configuracion.factorAlerta = 1;
+})
+
+CAROUSEL_NEXT.addEventListener("click", ()=>{
+    contador++;
+    if(contador >= CAROUSEL_ITEM.length){
+        contador = 0;
+    }
+    carouselActualizacion();
+    
+});
+
+function carouselActualizacion(){
+    CAROUSEL_ITEM.forEach((item, index)=>{
+        item.classList.remove('active');
+        if(index === contador){
+            item.classList.add('active');
         }
+    });
 }
 
-
-
-
-
-}
+carouselActualizacion();
